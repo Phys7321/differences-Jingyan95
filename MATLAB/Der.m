@@ -41,13 +41,17 @@ switch varargin{1}
         full = (F(x(1:n-1)+0.5*dx) - F(x(1:n-1)-0.5*dx))./dx;
         dy = (4/3).*half - (1/3).*full;
         xc = chop(x);
-    case 'h2' % second order
+    case 'h2' %high oder approx (second oder)
         dx = chop(dx);
-        dy = (0.5*F(x(2:n-1)+dx) - 0.5*F(x(2:n-1)-0.5*dx))./dx;
+        dy = (0.5*F(x(2:n-1)+dx) - 0.5*F(x(2:n-1)-dx))./dx;
         xc = x(2:n-1);
-    case 'h3' % third order
+    case 'h3' %high oder approx (third oder)
         dx = chop(dx);
         dy = ((1/24).*F(x(2:n-1)-(3/2).*dx) - (27/24).*F(x(2:n-1)-0.5*dx)+ (27/24).*F(x(2:n-1)+0.5*dx) - (1/24).*F(x(2:n-1)+(3/2).*dx))./dx;
+        xc = x(2:n-1);
+    case 'sd' %second order derivative 
+        dx = chop(dx);
+        dy = (F(x(2:n-1)+dx) + F(x(2:n-1)-dx) - 2*F(x(2:n-1)))./dx;
         xc = x(2:n-1);
     case 'data'
         return;
