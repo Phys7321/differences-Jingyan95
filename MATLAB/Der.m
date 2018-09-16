@@ -41,13 +41,13 @@ switch varargin{1}
         full = (F(x(1:n-1)+0.5*dx) - F(x(1:n-1)-0.5*dx))./dx;
         dy = (4/3).*half - (1/3).*full;
         xc = chop(x);
-    case 'h2'
-        dx = dx (1:n-1)
+    case 'h2' % second order
+        dx = chop(dx);
         dy = (0.5*F(x(2:n-1)+dx) - 0.5*F(x(2:n-1)-0.5*dx))./dx;
         xc = x(2:n-1);
-    case 'h3'
-        dx = dx (1:n-1)
-        dy = ((1/24).*F(x(2:n-1)-(3/2).*dx) - (27/24).*F(x(2:n-1)-0.5*dx)+ (27/24).*F(x(2:n-1)-0.5*dx) - (1/24).*F(x(2:n-1)-(3/2).*dx))./dx;
+    case 'h3' % third order
+        dx = chop(dx);
+        dy = ((1/24).*F(x(2:n-1)-(3/2).*dx) - (27/24).*F(x(2:n-1)-0.5*dx)+ (27/24).*F(x(2:n-1)+0.5*dx) - (1/24).*F(x(2:n-1)+(3/2).*dx))./dx;
         xc = x(2:n-1);
     case 'data'
         return;
